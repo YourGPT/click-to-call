@@ -3,19 +3,16 @@
 Add a **"Call Us"** button to any website and turn visitors into qualified leads with AI-powered outbound calling. This repository showcases several examples using [YourGPT](https://yourgpt.ai/) Phone Agents in a [Next.js](https://nextjs.org/) app.
 
 ## Features
-
 - **Multiple scenarios** – Try different use cases in the `case/` directory:
   - Booking a doctor appointment
   - Planning a trip
   - Managing a customer in your CRM
   - Requesting parcel delivery
   - Asking about website development services
-- **Instant outbound calls** – The doctor appointment example integrates directly with the YourGPT API to start a call when the form is submitted.
-- **Tailwind CSS styling** and smooth UI transitions powered by the `motion` library.
-- Toast notifications via [`sonner`](https://sonner.emilkowal.ski/) for instant feedback.
+- **Instant outbound calls** – The examples integrates directly with the YourGPT API to start a outbound call when the form is submitted.
+
 
 ## Prerequisites
-
 1. [Create an account on YourGPT](https://yourgpt.ai/) and build a chatbot.
 2. Configure a Voice AI agent and note its **Agent ID**.
 3. Generate an API key from the [API integration page](https://docs.yourgpt.ai/chatbot/integrations/api-integration/).
