@@ -42,7 +42,7 @@ export default function DoctorAppointmentPage() {
 
     try {
       setLoading(true);
-      const res: any = await fetch("https://api.yourgpt.ai/chatbot/v1/makeOutboundCall", {
+      const res = await fetch("https://api.yourgpt.ai/chatbot/v1/makeOutboundCall", {
         method: "POST",
         body: JSON.stringify({
           agent_id: agentId,
@@ -56,16 +56,23 @@ export default function DoctorAppointmentPage() {
         }),
         headers: {
           "Content-Type": "application/json",
-          "api-key": process.env.NEXT_PUBLIC_API_KEY || "",
+          "api-key": apiKey,
         },
       });
 
-      if (res.type === ApiResponseE.RXSUCCESS) {
+      if (!res.ok) {
+        toast.error("Call initiation failed");
+        return;
+      }
+
+      const result = await res.json();
+
+      if (result.type === ApiResponseE.RXSUCCESS) {
         toast.success("Call initiated successfully");
         setData({ name: "", phone: "" });
       }
 
-      if (res.type === ApiResponseE.RXERROR) {
+      if (result.type === ApiResponseE.RXERROR) {
         toast.error("Call initiation failed");
       }
     } catch (error) {
