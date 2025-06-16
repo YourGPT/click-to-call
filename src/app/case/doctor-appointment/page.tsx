@@ -4,6 +4,7 @@ import { CASES } from "../../data/cases";
 import Image from "next/image";
 import { ApiResponseE } from "@/app/types/enum";
 import { toast } from "sonner";
+import { AnimatePresence, motion } from "motion/react";
 
 const c = CASES.find((c) => c.slug === "doctor-appointment");
 
@@ -84,23 +85,31 @@ export default function DoctorAppointmentPage() {
 
   if (!c) return null;
   return (
-    <div className="flex items-center gap-10 w-full max-w-screen p-3 h-screen min-h-screen">
-      <div className="basis-1/2 max-md:hidden relative w-full h-full">
-        <Image fill className="rounded-lg h-full object-cover object-[0%_50%]" src={"/images/clinic.jpg"} alt={c.title} />
-      </div>
-      <span className="flex-1 md:basis-1/2">
-        <form onSubmit={handleSubmit} className="flex flex-col items-center text-center justify-center w-full gap-2">
-          <span className="text-3xl font-bold">{c.title}</span>
-          <span className=" opacity-70 max-w-md">{c.description}</span>
-          <div className="flex flex-col gap-2 w-full max-w-md pt-5">
-            <input type="text" placeholder="Name" className="w-full p-2 rounded-md border border-gray-200" value={data.name} onChange={(e) => setData({ ...data, name: e.target.value })} />
-            <input type="text" placeholder="Phone" className="w-full p-2 rounded-md border border-gray-200" value={data.phone} onChange={(e) => setData({ ...data, phone: e.target.value })} />
-          </div>
-          <button type="submit" className={`w-full max-w-md cursor-pointer bg-blue-500 text-white px-4 text-sm py-3 rounded-md ${loading ? "opacity-50 cursor-not-allowed" : ""}`}>
-            {loading ? "Initiating call..." : "Get a call"}
-          </button>
-        </form>
-      </span>
-    </div>
+    <AnimatePresence mode="wait">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
+        className="flex items-center gap-10 w-full max-w-screen p-3 h-screen min-h-screen"
+      >
+        <div className="basis-1/2 max-md:hidden relative w-full h-full">
+          <Image fill className="rounded-lg h-full object-cover object-[0%_50%]" src={"/images/clinic.jpg"} alt={c.title} />
+        </div>
+        <span className="flex-1 md:basis-1/2">
+          <form onSubmit={handleSubmit} className="flex flex-col items-center text-center justify-center w-full gap-2">
+            <span className="text-3xl font-bold">{c.title}</span>
+            <span className=" opacity-70 max-w-md">{c.description}</span>
+            <div className="flex flex-col gap-2 w-full max-w-md pt-5">
+              <input type="text" placeholder="Name" className="w-full p-2 rounded-md border border-gray-200" value={data.name} onChange={(e) => setData({ ...data, name: e.target.value })} />
+              <input type="text" placeholder="Phone" className="w-full p-2 rounded-md border border-gray-200" value={data.phone} onChange={(e) => setData({ ...data, phone: e.target.value })} />
+            </div>
+            <button type="submit" className={`w-full max-w-md cursor-pointer bg-blue-500 text-white px-4 text-sm py-3 rounded-md ${loading ? "opacity-50 cursor-not-allowed" : ""}`}>
+              {loading ? "Initiating call..." : "Get a call"}
+            </button>
+          </form>
+        </span>
+      </motion.div>
+    </AnimatePresence>
   );
 }

@@ -20,12 +20,12 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-5 left-0 right-0 rounded-full w-[95vw] mx-auto bg-white/20 backdrop-blur-md border transition-all duration-300 ease-in-out z-50 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full"} ${
+      className={`fixed top-3 left-0 right-0 rounded-full w-[95vw] mx-auto bg-white/20 backdrop-blur-md border transition-all duration-300 ease-in-out z-50 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full"} ${
         pathname.includes("trip") ? "text-white border-white/50" : "text-black border-black/10"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="flex items-center justify-between font-medium">
+        <div className="flex items-center justify-between font-medium text-sm">
           {CASES.map((c) => (
             <Link href={`/case/${c.slug}`} key={c.slug}>
               {c.purpose}
